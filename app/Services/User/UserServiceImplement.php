@@ -2,9 +2,9 @@
 
 namespace App\Services\User;
 
-use App\Models\User;
 use LaravelEasyRepository\ServiceApi;
 use App\Repositories\User\UserRepository;
+use Illuminate\Http\Response;
 
 class UserServiceImplement extends ServiceApi implements UserService
 {
@@ -15,11 +15,6 @@ class UserServiceImplement extends ServiceApi implements UserService
      */
     protected $mainRepository;
 
-    protected $title = "User";
-    protected $create_message = "successfully created";
-    protected $update_message = "successfully updated";
-    protected $delete_message = "successfully deleted";
-
     public function __construct(UserRepository $mainRepository)
     {
         $this->mainRepository = $mainRepository;
@@ -28,13 +23,17 @@ class UserServiceImplement extends ServiceApi implements UserService
     /**
      * find by id service implement
      * @param string $id
-     * @return ?User
+     * @return UserService
      */
     public function findByID(string $id): UserService
     {
         try {
             $result = $this->mainRepository->findByID($id);
-            dd($result);
+            if ($result == null) {
+                return $this->setStatus(false)
+                    ->setCode(Response::HTTP_NOT_FOUND)
+                    ->setMessage('user is not exist');
+            }
 
             return $this->setStatus(true)->setResult($result);
         } catch (\Exception $exception) {
@@ -45,16 +44,19 @@ class UserServiceImplement extends ServiceApi implements UserService
     /**
      * find by email service implement
      * @param string $email
-     * @return ?User
+     * @return UserService
      */
     public function findByEmail(string $email): UserService
     {
         try {
             $result = $this->mainRepository->findByEmail($email);
-            return $this->setStatus(true)
-                ->setCode(200)
-                ->setMessage("Success")
-                ->setResult($result);
+            if ($result == null) {
+                return $this->setStatus(false)
+                    ->setCode(Response::HTTP_NOT_FOUND)
+                    ->setMessage('user is not exist');
+            }
+
+            return $this->setStatus(true)->setResult($result);
         } catch (\Exception $exception) {
             return $this->exceptionResponse($exception);
         }

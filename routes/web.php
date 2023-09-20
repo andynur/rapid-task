@@ -14,5 +14,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return response()->json([
+        'success' => true,
+        'code' => 200,
+        'message' => 'EZV TEST API v1.0'
+    ]);
+});
+
+Route::fallback(function () {
+    return response()->json([
+        'message' => 'Page Not Found. If error persists, contact info@test.com'
+    ], 404);
 });
