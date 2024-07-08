@@ -1,108 +1,110 @@
-# EZV TASK PI
+# Rapid Task
 
-EZV Task Application is a simple web application built with Laravel for managing tasks. Users can create, view, update, and delete tasks, making it easy to keep track of their to-do lists.
+This is a simple Task API project built with Laravel 10, MySQL, Pest, and utilizing the Service Repository Pattern. This project provides a RESTful API for managing tasks.
 
-## Features
+## Requirements
 
--   Task API.
--   Service repository architecture.
--   Unit test with [PEST](https://pestphp.com/).
-
-## Technologies Used
-
--   Laravel 10: The PHP framework used to build the application.
--   MySQL: The database management system.
--   Composer: PHP package manager.
--   Artisan: Laravel's command-line tool.
--   Laravel Repository Service Pattern: [Read More](https://yaza-putu.github.io/).
+- PHP 8.1 or higher
+- Composer
+- MySQL
+- Node.js (for Laravel Mix)
 
 ## Installation
 
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/andynur/ezv-test.git
+    git clone https://github.com/andynur/rapid-task.git
+    cd rapid-task
     ```
 
-2. Navigate to the project directory:
-
-    ```bash
-    cd ezv-test
-    ```
-
-3. Install composer dependencies:
+2. Install the dependencies:
 
     ```bash
     composer install
+    npm install
     ```
 
-4. Copy the .env.example file to .env and configure your database settings:
+3. Copy the `.env.example` file to `.env` and configure the database connection:
 
     ```bash
     cp .env.example .env
     ```
 
-5. Generate an application key:
+    Update the database credentials in the `.env` file:
+
+    ```env
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=your_database
+    DB_USERNAME=your_username
+    DB_PASSWORD=your_password
+    ```
+
+4. Generate the application key:
 
     ```bash
     php artisan key:generate
     ```
 
-6. Migrate the database & seed data:
+5. Run the database migrations:
 
     ```bash
-    php artisan migrate:fresh --seed
+    php artisan migrate
     ```
 
-7. Start the development server:
+6. (Optional) Seed the database:
+
+    ```bash
+    php artisan db:seed
+    ```
+
+7. Serve the application:
 
     ```bash
     php artisan serve
     ```
 
-8. Access the application in your web browser at http://localhost:8000.
+    The application will be accessible at `http://localhost:8000`.
 
-## Test (WIP)
+## Running Tests
 
-My test methodology uses unit tests in core business rules using PEST library.
-
-```bash
-    ./vendor/bin/pest
-```
-
-Result:
+This project uses Pest for testing. To run the tests, use the following command:
 
 ```bash
-
-   PASS  Tests\Unit\ExampleTest
-   ✓ that true is true                                                                                                                                0.01s
-
-   PASS  Tests\Feature\ExampleTest
-  ✓ it returns a successful response                                                                                                                 0.17s
-
-   PASS  Tests\Feature\Http\Controllers\UserControllerTest
-  ✓ example                                                                                                                                          0.01s
-
-  Tests:    3 passed (3 assertions)
-  Duration: 0.30s
+./vendor/bin/pest
 ```
 
-## API Documentation
+## Project Structure
 
-To view the project's API documentation, you can access it through Postman Collection [here](https://documenter.getpostman.com/view/19148174/2s9YCAPpEC).
+The project follows the Service Repository Pattern. Here's a brief overview of the structure:
+
+- **app/Http/Controllers**: Contains the controllers for handling HTTP requests.
+- **app/Models**: Contains the Eloquent models.
+- **app/Repositories**: Contains the repository classes.
+- **app/Services**: Contains the service classes.
+- **database/migrations**: Contains the database migration files.
+- **tests**: Contains the test cases.
+
+## API Endpoints
+
+Here are some of the main API endpoints:
+
+- `GET /api/tasks`: Retrieve a list of tasks.
+- `GET /api/tasks/{id}`: Retrieve a specific task.
+- `POST /api/tasks`: Create a new task.
+- `PUT /api/tasks/{id}`: Update an existing task.
+- `DELETE /api/tasks/{id}`: Delete a task.
 
 ## Contributing
 
-If you'd like to contribute to this project, please follow these steps:
+Contributions are welcome! Please submit a pull request or open an issue to discuss any changes.
 
--   Fork the repository.
--   Create a new branch for your feature or bug fix: git checkout -b feature/your-feature-name.
--   Make your changes and commit them: git commit -m "Add your feature".
--   Push to the branch: git push origin feature/your-feature-name.
--   Create a pull request.
--   License
--   This project is open-source and available under the MIT License.
+## License
 
-## Contact
+This project is open-source and licensed under the MIT License.
 
-If you have any questions or issues, please feel free to contact me at andynur.id@gmail.com.
+---
+
+This README provides an overview of the project, installation steps, testing instructions, and an introduction to the project's structure and API endpoints. Adjust the details (like repository URLs, database credentials, etc.) as needed for your specific project.
