@@ -104,7 +104,3 @@ Contributions are welcome! Please submit a pull request or open an issue to disc
 ## License
 
 This project is open-source and licensed under the MIT License.
-
----
-
-This README provides an overview of the project, installation steps, testing instructions, and an introduction to the project's structure and API endpoints. Adjust the details (like repository URLs, database credentials, etc.) as needed for your specific project.
